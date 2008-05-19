@@ -1,4 +1,5 @@
 package Date::Holidays::DE;
+# $Id$
 
 use strict;
 use warnings;
@@ -14,7 +15,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '0.6';
+our $VERSION   = '1.0.1';
 
 sub holidays{
 	my %parameters = (
@@ -275,12 +276,10 @@ sub holidays{
 	#
 	my @returnlist;
 	foreach(sort{$holidaylist{$a}<=>$holidaylist{$b}}(keys(%holidaylist))){
-		# See if this platform has strftime(%s)
-		# if not, inject seconds manually into format string.
+		# Not all platforms have strftime(%s).
+		# Therefore, inject seconds manually into format string.
 		my $formatstring = $parameters{'FORMAT'};
-		if (strftime('%s', localtime($holidaylist{$_})) eq '%s'){
-			$formatstring =~ s/%{0}%s/$holidaylist{$_}/g;
-		}
+		$formatstring =~ s/%{0}%s/$holidaylist{$_}/g;
 		# Inject the holiday's alias name into the format string
 		# if it was requested by adding %#.
 		$formatstring =~ s/%{0}%#/$_/;
@@ -503,9 +502,6 @@ None of the calendar programs the author has looked at, know about June 17th.
 
 B<Date::Holidays::DE> is not configurable. Holiday changes don't come over
 night and a new module release can be rolled out within a single day.
-
-B<Date::Holidays::DE> probably won't work in Microsoft's "Windows" operating 
-environment.
 
 =head1 AUTHOR
 

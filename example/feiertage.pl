@@ -38,7 +38,7 @@ my $naechstes = $dieses + 1;
 
 # Get the list of holidays for next year
 my @feiertage = @{holidays( WHERE  => ['all'], 
-			    FORMAT => "%#:%d.%m.%Y",
+			    FORMAT => "%#:%d.%m.%Y (%s s since the epoch.)",
 			    YEAR   => $naechstes
 			    )};
 
