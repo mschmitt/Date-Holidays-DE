@@ -4,3 +4,5 @@ MANIFEST
 Makefile.PL
 README
 test.pl
+example/feiertage.pl
+example/werktage-diff.pl

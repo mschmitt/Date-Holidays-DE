@@ -1,5 +1,4 @@
 package Date::Holidays::DE;
-# $Id$
 
 use strict;
 use warnings;
@@ -15,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '0.5';
+our $VERSION   = '0.6';
 
 sub holidays{
 	my %parameters = (
@@ -44,7 +43,7 @@ sub holidays{
 	# fron  = Fronleichnam
 	# 1mai  = Maifeiertag
 	# mari	= Mariae Himmelfahrt
-	# 3oct  = Tag der deutschen Einheit
+	# 3okt  = Tag der deutschen Einheit
 	# refo  = Reformationstag
 	# alhe  = Allerheiligen
 	# buss  = Buss- und Bettag
@@ -230,10 +229,22 @@ sub holidays{
 	# Build list for returning
 	#
 	my %holidaylist;
-	# Walk the scope information passed via the WHERE parameter
-	foreach my $scope (@{$parameters{'WHERE'}}){ 
-		foreach my $alias(@{$holidays{$scope}}){
-			$holidaylist{$alias} = $holiday{$alias};
+	# See what holidays shall be printed
+	my $wantall = 0;
+	foreach (@{$parameters{'WHERE'}}){
+		if ($_ eq 'all'){
+			$wantall = 1;
+		}
+	}
+	if (1 == $wantall){
+		# All holidays if 'all' is in the WHERE parameter list.
+		%holidaylist = %holiday;
+	}else{
+		# Only specified regions
+		foreach my $scope (@{$parameters{'WHERE'}}){ 
+			foreach my $alias(@{$holidays{$scope}}){
+				$holidaylist{$alias} = $holiday{$alias};
+			}
 		}
 	}
 	# Add the most obscure holidays that were requested through
@@ -263,18 +274,20 @@ sub holidays{
 	# Sort values stored in the hash for returning
 	#
 	my @returnlist;
-	foreach(sort{$a <=> $b} (values(%holidaylist))){
+	foreach(sort{$holidaylist{$a}<=>$holidaylist{$b}}(keys(%holidaylist))){
 		# See if this platform has strftime(%s)
 		# if not, inject seconds manually into format string.
 		my $formatstring = $parameters{'FORMAT'};
-		if (strftime('%s', localtime($_)) eq '%s'){
-			$formatstring =~ s/%s/$_/g;
+		if (strftime('%s', localtime($holidaylist{$_})) eq '%s'){
+			$formatstring =~ s/%{0}%s/$holidaylist{$_}/g;
 		}
-		push @returnlist, 
-			strftime($formatstring, localtime($_));
+		# Inject the holiday's alias name into the format string
+		# if it was requested by adding %#.
+		$formatstring =~ s/%{0}%#/$_/;
+		push @returnlist,
+			strftime($formatstring, localtime($holidaylist{$_}));
 	}
 	return \@returnlist;
-
 }
 
 sub _date2timestamp{
@@ -289,7 +302,7 @@ __END__
 
 =head1 NAME
 
-Date::Holidays::DE - Determine German holidays in Perl
+Date::Holidays::DE - Determine German holidays
 
 =head1 SYNOPSIS
 
@@ -302,7 +315,7 @@ Date::Holidays::DE - Determine German holidays in Perl
 This module exports a single function named B<holidays()> which returns a list of 
 German holidays in a given year. 
 
-=head2 KNOWN HOLIDAYS
+=head1 KNOWN HOLIDAYS
 
 The module knows about the following holidays:
 
@@ -319,7 +332,7 @@ The module knows about the following holidays:
   fron  Fronleichnam                Corpus christi
   1mai  Maifeiertag                 Labor day, German style 
   mari  Mariae Himmelfahrt          Assumption day
-  3oct  Tag der deutschen Einheit   Reunion day
+  3okt  Tag der deutschen Einheit   Reunion day
   refo  Reformationstag             Reformation day
   alhe  Allerheiligen               All hallows day
   buss  Buss- und Bettag            Penance day
@@ -333,7 +346,9 @@ holiday is calculated. Too much detail would be far beyond the scope of this
 document, but it's not particularly hard once you've found the date for
 Easter.
 
-=head1 OUTPUT FORMAT
+=head1 USAGE
+
+=head2 OUTPUT FORMAT
 
 The list returned by B<holidays()> consists of UNIX-Style timestamps in seconds 
 since The Epoch. You may pass a B<strftime()> style format string to get the 
@@ -351,9 +366,20 @@ examples to get you started:
 Please consult the manual page of B<strftime()> for a complete list of available
 format definitions.
 
+There is, however, one "proprietary" extension to the formats of B<strftime()>:
+The format definition I<%#> will print the internal abbreviation used for each
+holiday. 
+
+  FORMAT=>"%#:%d.%m"              wei1:25.12.
+
+As the module doesn't want to deal with i18n 
+issues, you'll have to find your own way to translate the aliases into your 
+local language. See the I<example/feiertage.pl> script included in the
+distribution to get the idea. This was added in version 0.6. 
+
 =head2 LOCAL HOLIDAYS
 
-The modules also knows about different regulations throughout Germany.
+The module also knows about different regulations throughout Germany.
 
 When calling B<holidays()>, the resulting list by default contains the list of 
 Germany-wide holidays.
@@ -392,6 +418,12 @@ German holidays, use the following:
 returns the list of common German holidays merged with the list of holidays
 specific to Baden-Wuerttemberg.
 
+You can also request a list containing all holidays this module knows about:
+
+  my $feiertage_ref = holidays(WHERE=>['all']);
+
+will return a list of all known holidays. This was added in version 0.6.
+
 =head2 ADDITIONAL HOLIDAYS
 
 There are a number of holidays that aren't really holidays, e.g. New Year's Eve 
@@ -425,11 +457,10 @@ To disable this behaviour, set the I<WEEKENDS> option to 0:
 
   my $feiertage_ref = holidays(WEEKENDS=>0);
 
-
 =head1 COMPLETE EXAMPLE
 
 Get all holidays for Germany and Bayern in 2004, count New Year's Eve and 
-Christmas Eve as Holidays. Also, we live in a catolic region where Assumption
+Christmas Eve as Holidays. Also, we live in a catholic region where Assumption
 day is a holiday, too. Exclude weekends and return the date list in human
 readable format:
 
@@ -452,7 +483,7 @@ please drop the author a note.
 
 =head1 OFFICIAL HOLIDAY DATES
 
-The official holiday dates are published by the Federal Ministry of the 
+The official holiday dates are published by the German Federal Ministry of the 
 Interior at:
 
   http://www.bmi.bund.de/services/lexikon/lexikon.jsp?key=F&hit=Feiertage
@@ -466,8 +497,15 @@ flexible formatting. This limits the range of years to work on to
 the years from 1972 to 2037. 
 
 B<Date::Holidays::DE> doesn't know anything about past holiday regulations. 
-I<Tag der Deutschen Einheit>, for example, was changed from June 17th to 
-October 3rd after the reunion of the eastern and western parts of Germany.
+I<Tag der Deutschen Einheit>, for example, was moved in 1991 from June 17th 
+to October 3rd after the reunion of the eastern and western parts of Germany.
+None of the calendar programs the author has looked at, know about June 17th.
+
+B<Date::Holidays::DE> is not configurable. Holiday changes don't come over
+night and a new module release can be rolled out within a single day.
+
+B<Date::Holidays::DE> probably won't work in Microsoft's "Windows" operating 
+environment.
 
 =head1 AUTHOR
 

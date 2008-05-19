@@ -1,5 +1,10 @@
-Revision history for Perl extension Date::German::Holiday.
+Revision history for Perl extension Date::Holidays::DE
 
 v.0.5	Fri Nov 21 18:08:21 CET 2003
 	- Initial public release 
+
+v.0.6	Sun Nov 23 12:37:56 CET 2003
+	- Option to include the internal Alias in the generated list
+	- Option to generate a list of all known holidays
+	- Added example scripts
 
