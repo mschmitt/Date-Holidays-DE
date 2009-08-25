@@ -1,5 +1,4 @@
 package Date::Holidays::DE;
-# $Id$
 
 use strict;
 use warnings;
@@ -15,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.0.1';
+our $VERSION   = '1.0.2';
 
 sub holidays{
 	my %parameters = (
@@ -480,12 +479,14 @@ If you run into a miscalculation, need some sort of feature or an additional
 holiday, or if you know of any new changes to our funky holiday situation, 
 please drop the author a note.
 
-=head1 OFFICIAL HOLIDAY DATES
+=head1 OFFICIAL HOLIDAY INFORMATION
 
-The official holiday dates are published by the German Federal Ministry of the 
-Interior at:
+The German Federal Ministry of the Interior used to publish a comprehensive
+list of holiday dates. This does currently not appear to be the case.
 
-  http://www.bmi.bund.de/services/lexikon/lexikon.jsp?key=F&hit=Feiertage
+A list of holidays per state is available at:
+
+  http://www.bmi.bund.de/cae/servlet/contentblob/150560/publicationFile/13610/feiertage_de.pdf
 
 =head1 LIMITATIONS
 
