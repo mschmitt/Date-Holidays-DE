@@ -1,7 +1,10 @@
 #!/usr/bin/perl -w
 use strict;
 use warnings;
+use utf8;
 use Date::Holidays::DE qw(holidays);
+
+binmode STDOUT, ":utf8"; 
 
 # Sample script for Date::Holidays::DE by Martin Schmitt <mas at scsy dot de>
 
@@ -9,7 +12,7 @@ use Date::Holidays::DE qw(holidays);
 # See the manpage for a list of all aliases.
 my %feiertagsnamen = (
 		'neuj' => 'Neujahrstag',
-		'hl3k' => 'Hl. 3 Könige',
+		'hl3k' => 'Hl. 3 KÃ¶nige',
 		'romo' => 'Rosenmontag',
 		'fadi' => 'Faschingsdienstag',
 		'karf' => 'Karfreitag',
@@ -20,11 +23,11 @@ my %feiertagsnamen = (
 		'himm' => 'Himmelfahrtstag',
 		'fron' => 'Fronleichnam',
 		'1mai' => 'Maifeiertag',
-		'mari' => 'Mariä Himmelfahrt',
+		'mari' => 'MariÃ¤ Himmelfahrt',
 		'3okt' => 'Tag der deutschen Einheit',
 		'refo' => 'Reformationstag',
 		'alhe' => 'Allerheiligen',
-		'buss' => 'Buß- und Bettag',
+		'buss' => 'BuÃŸ- und Bettag',
 		'heil' => 'Heiligabend',
 		'wei1' => '1. Weihnachtstag',
 		'wei2' => '2. Weihnachtstag',
@@ -42,7 +45,7 @@ my @feiertage = @{holidays( WHERE  => ['all'],
 			    YEAR   => $naechstes
 			    )};
 
-print "Feiertage für $naechstes:\n";
+print "Feiertage fÃ¼r $naechstes:\n";
 print "-------------------\n";
 
 foreach (@feiertage){

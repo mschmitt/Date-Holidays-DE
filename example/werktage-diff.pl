@@ -1,8 +1,11 @@
 #!/usr/bin/perl -w
 use strict;
 use warnings;
+use utf8;
 use Date::Holidays::DE qw(holidays);
 use Date::Business;
+
+binmode STDOUT, ":utf8"; 
 
 # Sample script for integration of Date::Holidays::DE with Date::Business
 
@@ -11,9 +14,9 @@ use Date::Business;
 # Calculate the difference between two dates using three different
 # methods from Date::Business
 
-my $startdate = "20030414";    # Monday before Easter 2003
-my $enddate   = "20030428";    # Monday after Easter monday 2003
-my $year      = "2003";        # Not particularly elaborate, but okay for now
+my $startdate = "20100329";    # Monday before Easter 2010
+my $enddate   = "20100412";    # Monday after Easter monday 2010
+my $year      = "2010";        # Not particularly elaborate, but okay for now
 
 print "Abstand zwischen $startdate und $enddate...\n";
 
@@ -23,7 +26,7 @@ print "Abstand zwischen $startdate und $enddate...\n";
 my $start1    = new Date::Business(DATE => $startdate);
 my $end1      = new Date::Business(DATE => $enddate);
 my $diff1     = $end1->diff($start1);
-print "$diff1 Tage (Wochenenden und Feiertage unberücksichtigt)\n";
+print "$diff1 Tage (Wochenenden und Feiertage unberÃ¼cksichtigt)\n";
 
 # 2. Excluding weekends (Should be 10 days difference)
 #
@@ -31,7 +34,7 @@ print "$diff1 Tage (Wochenenden und Feiertage unberücksichtigt)\n";
 my $start2    = new Date::Business(DATE => $startdate);
 my $end2      = new Date::Business(DATE => $enddate);
 my $diff2     = $end2->diffb($start2);
-print "$diff2 Tage (Wochenenden berücksichtigt, Feiertage unberücksichtigt)\n";
+print "$diff2 Tage (Wochenenden berÃ¼cksichtigt, Feiertage unberÃ¼cksichtigt)\n";
 
 # 3. Excluding weekends and holidays (Should be 8 days difference)
 #
@@ -56,6 +59,6 @@ my $start3    = new Date::Business(DATE => $startdate,
 my $end3      = new Date::Business(DATE => $enddate,
 				   HOLIDAY => \&business_holiday);
 my $diff3     = $end3->diffb($start3);
-print "$diff3 Tage (Wochenenden und Feiertage berücksichtigt)\n";
+print "$diff3 Tage (Wochenenden und Feiertage berÃ¼cksichtigt)\n";
 
 exit 0;
