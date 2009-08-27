@@ -15,3 +15,9 @@ v.1.0	Sat May  3 13:28:27 CEST 2008
 
 v.1.0.1 Sat May  3 14:05:56 CEST 2008
 	- Fixed POD wording.
+
+v.1.1   Thu Aug 27 20:02:32 CEST 2009
+	- Fixed Tag der deutschen Einheit for pre-1990 (June 17 then). This has 
+	  been my peeve for far too long. ;-)
+	- Compatibility tested: 5.6.1-5.10.1
+	- Reverted example scripts to plain ASCII.

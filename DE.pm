@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.0.2';
+our $VERSION   = '1.1';
 
 sub holidays{
 	my %parameters = (
@@ -42,8 +42,9 @@ sub holidays{
 	# himm  = Himmelfahrtstag
 	# fron  = Fronleichnam
 	# 1mai  = Maifeiertag
+	# 17ju  = Tag der deutschen Einheit (>= 1954, <= 1990)
 	# mari	= Mariae Himmelfahrt
-	# 3okt  = Tag der deutschen Einheit
+	# 3okt  = Tag der deutschen Einheit (>= 1990)
 	# refo  = Reformationstag
 	# alhe  = Allerheiligen
 	# buss  = Buss- und Bettag
@@ -78,7 +79,7 @@ sub holidays{
 	my %holidays;
 	# Common holidays througout Germany
 	@{$holidays{'common'}} = qw(neuj karf osts ostm 1mai 
-		pfis pfim himm 3okt wei1 wei2);
+		pfis pfim himm 17ju 3okt wei1 wei2);
 
 	# Now the extra holidays for the federal states.
 	# As if things weren't bad enough, some holidays are only valid
@@ -153,8 +154,13 @@ sub holidays{
 	# Assumption day Aug 15
 	$holiday{'mari'} = _date2timestamp($year,  8, 15);
 
-	# Reunion day Oct 3
-	$holiday{'3okt'} = _date2timestamp($year, 10,  3);
+	# Reunion day Jun 17 (1954-1990)
+	$holiday{'17ju'} = _date2timestamp($year, 6,  17) 
+		if (($year <= 1990) and ($year >= 1954));
+
+	# Reunion day Oct 3 (since 1990)
+	$holiday{'3okt'} = _date2timestamp($year, 10,  3) 
+		if ($year >= 1990);
 	
 	# Reformation day Oct 31
 	$holiday{'refo'} = _date2timestamp($year, 10, 31);
@@ -329,8 +335,9 @@ The module knows about the following holidays:
   himm  Himmelfahrtstag             Ascension day
   fron  Fronleichnam                Corpus christi
   1mai  Maifeiertag                 Labor day, German style 
+  17ju  Tag der deutschen Einheit   Reunion day (>= 1954, <= 1990)
   mari  Mariae Himmelfahrt          Assumption day
-  3okt  Tag der deutschen Einheit   Reunion day
+  3okt  Tag der deutschen Einheit   Reunion day (>= 1990)
   refo  Reformationstag             Reformation day
   alhe  Allerheiligen               All hallows day
   buss  Buss- und Bettag            Penance day
@@ -479,6 +486,10 @@ If you run into a miscalculation, need some sort of feature or an additional
 holiday, or if you know of any new changes to our funky holiday situation, 
 please drop the author a note.
 
+I<Tag der Deutschen Einheit> was moved from June 17th to October 3rd in 1990
+and is therefore listed twice when calculating holidays for 1990. This is 
+not a bug. Awareness for this was introduced in Version 1.1.
+
 =head1 OFFICIAL HOLIDAY INFORMATION
 
 The German Federal Ministry of the Interior used to publish a comprehensive
@@ -496,10 +507,7 @@ holidays as UNIX timestamps (seconds since The Epoch) to allow for more
 flexible formatting. This limits the range of years to work on to 
 the years from 1972 to 2037. 
 
-B<Date::Holidays::DE> doesn't know anything about past holiday regulations. 
-I<Tag der Deutschen Einheit>, for example, was moved in 1991 from June 17th 
-to October 3rd after the reunion of the eastern and western parts of Germany.
-None of the calendar programs the author has looked at, know about June 17th.
+Historic regulations for I<Buss- und Bettag> are still not implemented.
 
 B<Date::Holidays::DE> is not configurable. Holiday changes don't come over
 night and a new module release can be rolled out within a single day.

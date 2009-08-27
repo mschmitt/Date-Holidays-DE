@@ -1,11 +1,8 @@
 #!/usr/bin/perl -w
 use strict;
 use warnings;
-use utf8;
 use Date::Holidays::DE qw(holidays);
 use Date::Business;
-
-binmode STDOUT, ":utf8"; 
 
 # Sample script for integration of Date::Holidays::DE with Date::Business
 
@@ -26,7 +23,7 @@ print "Abstand zwischen $startdate und $enddate...\n";
 my $start1    = new Date::Business(DATE => $startdate);
 my $end1      = new Date::Business(DATE => $enddate);
 my $diff1     = $end1->diff($start1);
-print "$diff1 Tage (Wochenenden und Feiertage unberücksichtigt)\n";
+print "$diff1 Tage (Wochenenden und Feiertage unberuecksichtigt)\n";
 
 # 2. Excluding weekends (Should be 10 days difference)
 #
@@ -34,7 +31,7 @@ print "$diff1 Tage (Wochenenden und Feiertage unberücksichtigt)\n";
 my $start2    = new Date::Business(DATE => $startdate);
 my $end2      = new Date::Business(DATE => $enddate);
 my $diff2     = $end2->diffb($start2);
-print "$diff2 Tage (Wochenenden berücksichtigt, Feiertage unberücksichtigt)\n";
+print "$diff2 Tage (Wochenenden beruecksichtigt, Feiertage unberuecksichtigt)\n";
 
 # 3. Excluding weekends and holidays (Should be 8 days difference)
 #
@@ -59,6 +56,6 @@ my $start3    = new Date::Business(DATE => $startdate,
 my $end3      = new Date::Business(DATE => $enddate,
 				   HOLIDAY => \&business_holiday);
 my $diff3     = $end3->diffb($start3);
-print "$diff3 Tage (Wochenenden und Feiertage berücksichtigt)\n";
+print "$diff3 Tage (Wochenenden und Feiertage beruecksichtigt)\n";
 
 exit 0;

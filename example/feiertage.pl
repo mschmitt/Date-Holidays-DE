@@ -1,10 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use warnings;
-use utf8;
 use Date::Holidays::DE qw(holidays);
-
-binmode STDOUT, ":utf8"; 
 
 # Sample script for Date::Holidays::DE by Martin Schmitt <mas at scsy dot de>
 
@@ -12,7 +9,7 @@ binmode STDOUT, ":utf8";
 # See the manpage for a list of all aliases.
 my %feiertagsnamen = (
 		'neuj' => 'Neujahrstag',
-		'hl3k' => 'Hl. 3 Könige',
+		'hl3k' => 'Hl. 3 Koenige',
 		'romo' => 'Rosenmontag',
 		'fadi' => 'Faschingsdienstag',
 		'karf' => 'Karfreitag',
@@ -23,11 +20,12 @@ my %feiertagsnamen = (
 		'himm' => 'Himmelfahrtstag',
 		'fron' => 'Fronleichnam',
 		'1mai' => 'Maifeiertag',
-		'mari' => 'Mariä Himmelfahrt',
+		'17ju' => 'Tag der deutschen Einheit (1954-1990)',
+		'mari' => 'Mariae Himmelfahrt',
 		'3okt' => 'Tag der deutschen Einheit',
 		'refo' => 'Reformationstag',
 		'alhe' => 'Allerheiligen',
-		'buss' => 'Buß- und Bettag',
+		'buss' => 'Buss- und Bettag',
 		'heil' => 'Heiligabend',
 		'wei1' => '1. Weihnachtstag',
 		'wei2' => '2. Weihnachtstag',
@@ -45,14 +43,14 @@ my @feiertage = @{holidays( WHERE  => ['all'],
 			    YEAR   => $naechstes
 			    )};
 
-print "Feiertage für $naechstes:\n";
-print "-------------------\n";
+print "Feiertage fuer $naechstes:\n";
+print "--------------------\n";
 
 foreach (@feiertage){
 	# Split name and date
 	my ($name, $datum) = split /:/;
 	# Print name from $feiertagsnamen along with the date
-	printf ("%-30s: %10s\n", $feiertagsnamen{$name}, $datum);
+	printf ("%-40s: %10s\n", $feiertagsnamen{$name}, $datum);
 }
 
 exit 0;
