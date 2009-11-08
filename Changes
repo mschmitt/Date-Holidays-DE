@@ -21,3 +21,6 @@ v.1.1   Thu Aug 27 20:02:32 CEST 2009
 	  been my peeve for far too long. ;-)
 	- Compatibility tested: 5.6.1-5.10.1
 	- Reverted example scripts to plain ASCII.
+
+v1.2    Sun Nov  8 08:22:34 CET 2009
+	- Fixed the fix for Tag der deutschen Einheit from previous version. 

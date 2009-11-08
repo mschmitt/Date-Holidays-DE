@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.1';
+our $VERSION   = '1.2';
 
 sub holidays{
 	my %parameters = (
@@ -78,8 +78,9 @@ sub holidays{
 	#
 	my %holidays;
 	# Common holidays througout Germany
+	# 17ju/3okt are added to the list later, during date calculation
 	@{$holidays{'common'}} = qw(neuj karf osts ostm 1mai 
-		pfis pfim himm 17ju 3okt wei1 wei2);
+		pfis pfim himm wei1 wei2);
 
 	# Now the extra holidays for the federal states.
 	# As if things weren't bad enough, some holidays are only valid
@@ -155,12 +156,16 @@ sub holidays{
 	$holiday{'mari'} = _date2timestamp($year,  8, 15);
 
 	# Reunion day Jun 17 (1954-1990)
-	$holiday{'17ju'} = _date2timestamp($year, 6,  17) 
-		if (($year <= 1990) and ($year >= 1954));
+	if (($year <= 1990) and ($year >= 1954)){
+		$holiday{'17ju'} = _date2timestamp($year, 6,  17);
+		push @{$holidays{'common'}}, '17ju';
+	}
 
 	# Reunion day Oct 3 (since 1990)
-	$holiday{'3okt'} = _date2timestamp($year, 10,  3) 
-		if ($year >= 1990);
+	if ($year >= 1990){
+		$holiday{'3okt'} = _date2timestamp($year, 10,  3);
+		push @{$holidays{'common'}}, '3okt';
+	}
 	
 	# Reformation day Oct 31
 	$holiday{'refo'} = _date2timestamp($year, 10, 31);
