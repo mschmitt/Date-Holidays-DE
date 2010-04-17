@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.2';
+our $VERSION   = '1.3';
 
 sub holidays{
 	my %parameters = (
@@ -43,6 +43,7 @@ sub holidays{
 	# fron  = Fronleichnam
 	# 1mai  = Maifeiertag
 	# 17ju  = Tag der deutschen Einheit (>= 1954, <= 1990)
+	# frie	= Augsburger Friedensfest
 	# mari	= Mariae Himmelfahrt
 	# 3okt  = Tag der deutschen Einheit (>= 1990)
 	# refo  = Reformationstag
@@ -151,6 +152,9 @@ sub holidays{
 	$holiday{'heil'} = _date2timestamp($year, 12, 24);
 	$holiday{'wei1'} = _date2timestamp($year, 12, 25);
 	$holiday{'wei2'} = _date2timestamp($year, 12, 26);
+
+	# Augsburger Friedensfest
+	$holiday{'frie'} = _date2timestamp($year,  8,  8);
 
 	# Assumption day Aug 15
 	$holiday{'mari'} = _date2timestamp($year,  8, 15);
@@ -341,6 +345,7 @@ The module knows about the following holidays:
   fron  Fronleichnam                Corpus christi
   1mai  Maifeiertag                 Labor day, German style 
   17ju  Tag der deutschen Einheit   Reunion day (>= 1954, <= 1990)
+  frie  Augsburger Friedensfest     Augsburg peace day
   mari  Mariae Himmelfahrt          Assumption day
   3okt  Tag der deutschen Einheit   Reunion day (>= 1990)
   refo  Reformationstag             Reformation day
@@ -366,8 +371,7 @@ dates in any format you desire:
 
   my $feiertage_ref = holidays(FORMAT=>"%d.%m.%Y");
 
-This might be considered "hard to use" by some people, so here are a few 
-examples to get you started:
+Here are a few examples to get you started:
 
   FORMAT=>"%d.%m.%Y"              25.12.2001
   FORMAT=>"%Y%m%d"                20011225

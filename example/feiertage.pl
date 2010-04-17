@@ -22,6 +22,7 @@ my %feiertagsnamen = (
 		'1mai' => 'Maifeiertag',
 		'17ju' => 'Tag der deutschen Einheit (1954-1990)',
 		'mari' => 'Mariae Himmelfahrt',
+		'frie' => 'Augsburger Friedensfest (regional)',
 		'3okt' => 'Tag der deutschen Einheit',
 		'refo' => 'Reformationstag',
 		'alhe' => 'Allerheiligen',
