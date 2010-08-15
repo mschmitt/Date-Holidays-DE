@@ -28,3 +28,12 @@ v1.2    Sun Nov  8 08:22:34 CET 2009
 v1.3    Sat Apr 17 18:34:33 2010 +0200
         - Added Augsburg Peace Day as optional local holiday.
 	  Requested and patch kindly provided by Marc André Selig.
+
+v1.4    Sun Aug 15 13:12:47 CEST 2010
+	- Oliver Paukstadt added religious "silent days" 
+	  - Ash wednesday
+	  - Maundy Thursday
+	  - Holy Saturday
+	  - Remembrance Day, German Style
+	  - Sunday in commemoration of the dead
+	  - 4 Sundays of Advent

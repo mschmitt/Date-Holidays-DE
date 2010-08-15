@@ -4,8 +4,8 @@ Date::Holidays::DE
 This module creates a list of German holidays in a given year.
 
 It knows about special holiday regulations for all of Germany's federal 
-states and also about "semi-holidays" that will be treated as holidays on 
-request.
+states and also about "semi-holidays" and religious "silent days" that 
+will be treated as holidays on request.
 
 Holidays that occur on weekends can be excluded from the generated list.
 
@@ -23,11 +23,12 @@ To install this module type the following:
    make install
 
 
-DEVELOPMENT STATUS
+PATCHES
 
-Mostly untested. It works and it's Good Enough(tm) for the author to 
-use it in a small application he wrote for one of his clients.
+Patches are welcome. If you can, please fork the project on github to 
+submit your change:
 
+  http://github.com/mschmitt/Date-Holidays-DE
 
 DEPENDENCIES
 
@@ -39,7 +40,7 @@ This module requires these other modules and libraries:
 
 COPYRIGHT AND LICENSE
 
-  Copyright (c) 2009, Martin Schmitt <mas at scsy dot de>
+  Copyright (c) 2010, Martin Schmitt <mas at scsy dot de>
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose with or without fee is hereby granted, provided that the above

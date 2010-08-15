@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.3.1';
+our $VERSION   = '1.4';
 
 sub holidays{
 	my %parameters = (
@@ -34,7 +34,10 @@ sub holidays{
 	# hl3k	= Dreikoenigstag
 	# romo  = Rosenmontag
 	# fadi  = Faschingsdienstag
+	# asmi  = Aschermittwoch
+	# grdo  = Gruendonnerstag
 	# karf  = Karfreitag
+	# kars  = Karsamstag
 	# osts  = Ostersonntag
 	# ostm  = Ostermontag
 	# pfis  = Pfingstsonntag
@@ -49,6 +52,12 @@ sub holidays{
 	# refo  = Reformationstag
 	# alhe  = Allerheiligen
 	# buss  = Buss- und Bettag
+	# votr	= Volkstrauertag
+	# toso  = Totensonntag
+	# adv1  = 1. Advent
+	# adv2  = 2. Advent
+	# adv3  = 3. Advent
+	# adv4  = 4. Advent
 	# heil  = Heiligabend
 	# wei1  = 1. Weihnachtstag
 	# wei2  = 2. Weihnachtstag
@@ -192,10 +201,25 @@ sub holidays{
 		Date::Calc::Add_Delta_Days($year, $month, $day, -47);
 	$holiday{'fadi'} = _date2timestamp($j_fadi, $m_fadi, $t_fadi);
 
+	#  Ash Wednesday = Easter Sunday minus 46 days
+	my ($j_asmi, $m_asmi, $t_asmi) =
+		Date::Calc::Add_Delta_Days($year, $month, $day, -46);
+	$holiday{'asmi'} = _date2timestamp($j_asmi, $m_asmi, $t_asmi);
+
+	# Maundy Thursday = Easter Sunday minus 3 days
+	my ($j_grdo, $m_grdo, $t_grdo) =
+		Date::Calc::Add_Delta_Days($year, $month, $day, -3);
+	$holiday{'grdo'} = _date2timestamp($j_grdo, $m_grdo, $t_grdo);
+
 	# Good Friday = Easter Sunday minus 2 days
 	my ($j_karf, $m_karf, $t_karf) =
 		Date::Calc::Add_Delta_Days($year, $month, $day, -2);
 	$holiday{'karf'} = _date2timestamp($j_karf, $m_karf, $t_karf);
+
+	# Holy Saturday = Easter Sunday minus 1 day
+	my ($j_kars, $m_kars, $t_kars) =
+		Date::Calc::Add_Delta_Days($year, $month, $day, -1);
+	$holiday{'kars'} = _date2timestamp($j_kars, $m_kars, $t_kars);
 
 	# Easter Sunday is just that
 	$holiday{'osts'} = _date2timestamp($year, $month, $day);
@@ -240,6 +264,14 @@ sub holidays{
 	my ($j_buss, $m_buss, $t_buss) =
 		Date::Calc::Add_Delta_Days($year, 12, $tempdate, -32);
 	$holiday{'buss'} = _date2timestamp($j_buss, $m_buss, $t_buss);
+
+	# store the sundays in advent and the two sundays before
+	my $sc=0;
+	foreach my $name ("adv4", "adv3", "adv2", "adv1", "toso", "votr") {
+		$holiday{$name} = _date2timestamp(
+		    Date::Calc::Add_Delta_Days($year, 12, $tempdate, 7*$sc--)
+		);
+	}
 
 	# Build list for returning
 	#
@@ -336,7 +368,10 @@ The module knows about the following holidays:
   hl3k  Hl. 3 Koenige               Epiphany
   romo  Rosenmontag                 Carnival monday
   fadi  Faschingsdienstag           Shrove tuesday
+  asmi  Aschermittwoch              Ash wednesday
+  grdo	Gruendonnerstag             Maundy Thursday
   karf  Karfreitag                  Good friday
+  kars	Karsamstag                  Holy Saturday
   osts  Ostersonntag                Easter sunday
   ostm  Ostermontag                 Easter monday
   pfis  Pfingstsonntag              Whit sunday
@@ -351,6 +386,12 @@ The module knows about the following holidays:
   refo  Reformationstag             Reformation day
   alhe  Allerheiligen               All hallows day
   buss  Buss- und Bettag            Penance day
+  votr  Volkstrauertag              Remembrance Day, German Style
+  toso  Totensonntag                Sunday in commemoration of the dead
+  adv1  1. Advent                   1st sunday in advent
+  adv2  2. Advent                   2nd sunday in advent
+  adv3  3. Advent                   3rd sunday in advent
+  adv4  4. Advent                   4th sunday in advent
   heil  Heiligabend                 Christmas eve
   wei1  1. Weihnachtstag            Christmas
   wei2  2. Weihnachtstag            Christmas
@@ -494,6 +535,11 @@ B<Time::Local> modules from the standard Perl distribution.
 If you run into a miscalculation, need some sort of feature or an additional
 holiday, or if you know of any new changes to our funky holiday situation, 
 please drop the author a note.
+
+Patches are welcome. If you can, please fork the project on I<github> to
+submit your change:
+
+  http://github.com/mschmitt/Date-Holidays-DE
 
 I<Tag der Deutschen Einheit> was moved from June 17th to October 3rd in 1990
 and is therefore listed twice when calculating holidays for 1990. This is 

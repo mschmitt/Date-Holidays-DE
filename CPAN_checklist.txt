@@ -1,0 +1,3 @@
+- Version in DE.pm
+- Changes
+- make clean; perl Makefile.PL; make dist
