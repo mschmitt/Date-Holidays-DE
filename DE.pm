@@ -520,10 +520,10 @@ day is a holiday, too. Exclude weekends and return the date list in human
 readable format:
 
   my $feiertage_ref = holidays( WHERE    => ['common', 'he'],
-				FORMAT   => "%a, %d.%m.%Y"
-				WEEKENDS => 0,
+                                FORMAT   => "%a, %d.%m.%Y",
+                                WEEKENDS => 0,
                                 YEAR     => 2004,
-				ADD      => ['heil', 'silv', 'mari']);
+                                ADD      => ['heil', 'silv', 'mari']);
 
 =head1 PREREQUISITES
 
