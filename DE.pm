@@ -64,7 +64,7 @@ sub holidays{
 	# silv  = Silvester
 
 	# Aliases for German federal states
-	# See http://www.bundestag.de/info/wahlen/154/1545.html
+	# See http://www.bmi.bund.de/cae/servlet/contentblob/150560/publicationFile/13610/feiertage_de.pdf
 	#
 	# bw = Baden-Wuerttemberg
 	# by = Freistaat Bayern
