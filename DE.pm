@@ -104,7 +104,7 @@ sub holidays{
 	@{$holidays{'by'}} = qw(hl3k fron alhe);
 
 	# Extras for Berlin
-	@{$holidays{'bl'}} = qw();
+	@{$holidays{'be'}} = qw();
 	
 	# Extras for Brandenburg
 	@{$holidays{'bb'}} = qw(osts pfis refo);
