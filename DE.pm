@@ -89,8 +89,8 @@ sub holidays{
 	my %holidays;
 	# Common holidays througout Germany
 	# 17ju/3okt are added to the list later, during date calculation
-	@{$holidays{'common'}} = qw(neuj karf osts ostm 1mai 
-		pfis pfim himm wei1 wei2);
+	@{$holidays{'common'}} = qw(neuj karf ostm 1mai
+		pfim himm wei1 wei2);
 
 	# Now the extra holidays for the federal states.
 	# As if things weren't bad enough, some holidays are only valid
@@ -107,7 +107,7 @@ sub holidays{
 	@{$holidays{'bl'}} = qw();
 	
 	# Extras for Brandenburg
-	@{$holidays{'bb'}} = qw(refo);
+	@{$holidays{'bb'}} = qw(osts pfis refo);
 	
 	# Extras for Bremen
 	@{$holidays{'hb'}} = qw();
