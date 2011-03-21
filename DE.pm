@@ -30,8 +30,8 @@ sub holidays{
 
 	# Aliases for holidays
 	#
-	# neuj	= Neujahr
-	# hl3k	= Dreikoenigstag
+	# neuj  = Neujahr
+	# hl3k  = Dreikoenigstag
 	# romo  = Rosenmontag
 	# fadi  = Faschingsdienstag
 	# asmi  = Aschermittwoch
@@ -46,13 +46,13 @@ sub holidays{
 	# fron  = Fronleichnam
 	# 1mai  = Maifeiertag
 	# 17ju  = Tag der deutschen Einheit (>= 1954, <= 1990)
-	# frie	= Augsburger Friedensfest
-	# mari	= Mariae Himmelfahrt
+	# frie  = Augsburger Friedensfest
+	# mari  = Mariae Himmelfahrt
 	# 3okt  = Tag der deutschen Einheit (>= 1990)
 	# refo  = Reformationstag
 	# alhe  = Allerheiligen
 	# buss  = Buss- und Bettag
-	# votr	= Volkstrauertag
+	# votr  = Volkstrauertag
 	# toso  = Totensonntag
 	# adv1  = 1. Advent
 	# adv2  = 2. Advent
@@ -64,7 +64,7 @@ sub holidays{
 	# silv  = Silvester
 
 	# Aliases for German federal states
-	# See http://www.bundestag.de/info/wahlen/154/1545.html
+	# See http://www.bmi.bund.de/cae/servlet/contentblob/150560/publicationFile/13610/feiertage_de.pdf
 	#
 	# bw = Baden-Wuerttemberg
 	# by = Freistaat Bayern
@@ -89,8 +89,8 @@ sub holidays{
 	my %holidays;
 	# Common holidays througout Germany
 	# 17ju/3okt are added to the list later, during date calculation
-	@{$holidays{'common'}} = qw(neuj karf osts ostm 1mai 
-		pfis pfim himm wei1 wei2);
+	@{$holidays{'common'}} = qw(neuj karf ostm 1mai
+		pfim himm wei1 wei2);
 
 	# Now the extra holidays for the federal states.
 	# As if things weren't bad enough, some holidays are only valid
@@ -104,11 +104,11 @@ sub holidays{
 	@{$holidays{'by'}} = qw(hl3k fron alhe);
 
 	# Extras for Berlin
-	@{$holidays{'bl'}} = qw();
-	
+	@{$holidays{'be'}} = qw();
+
 	# Extras for Brandenburg
-	@{$holidays{'bb'}} = qw(refo);
-	
+	@{$holidays{'bb'}} = qw(osts pfis refo);
+
 	# Extras for Bremen
 	@{$holidays{'hb'}} = qw();
 
@@ -141,7 +141,7 @@ sub holidays{
 
 	# Extras for Schleswig-Holstein
 	@{$holidays{'sh'}} = qw();
-	
+
 	# Extras for Thueringen
 	@{$holidays{'th'}} = qw(refo);
 
@@ -195,7 +195,7 @@ sub holidays{
 	my ($j_romo, $m_romo, $t_romo) =
 		Date::Calc::Add_Delta_Days($year, $month, $day, -48);
 	$holiday{'romo'} = _date2timestamp($j_romo, $m_romo, $t_romo);
-	
+
 	# Shrove Tuesday = Easter Sunday minus 47 days
 	my ($j_fadi, $m_fadi, $t_fadi) =
 		Date::Calc::Add_Delta_Days($year, $month, $day, -47);
@@ -269,7 +269,7 @@ sub holidays{
 	my $sc=0;
 	foreach my $name ("adv4", "adv3", "adv2", "adv1", "toso", "votr") {
 		$holiday{$name} = _date2timestamp(
-		    Date::Calc::Add_Delta_Days($year, 12, $tempdate, 7*$sc--)
+			Date::Calc::Add_Delta_Days($year, 12, $tempdate, 7*$sc--)
 		);
 	}
 
@@ -369,9 +369,9 @@ The module knows about the following holidays:
   romo  Rosenmontag                 Carnival monday
   fadi  Faschingsdienstag           Shrove tuesday
   asmi  Aschermittwoch              Ash wednesday
-  grdo	Gruendonnerstag             Maundy Thursday
+  grdo  Gruendonnerstag             Maundy Thursday
   karf  Karfreitag                  Good friday
-  kars	Karsamstag                  Holy Saturday
+  kars  Karsamstag                  Holy Saturday
   osts  Ostersonntag                Easter sunday
   ostm  Ostermontag                 Easter monday
   pfis  Pfingstsonntag              Whit sunday
