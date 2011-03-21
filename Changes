@@ -37,3 +37,12 @@ v1.4    Sun Aug 15 13:12:47 CEST 2010
 	  - Remembrance Day, German Style
 	  - Sunday in commemoration of the dead
 	  - 4 Sundays of Advent
+
+v1.5	Mon Mar 21 11:10:47 CET 2011
+	- Tobias Leich fixed:
+	  - Sloppy whitespaces and indentation
+	  - Status of Easter Sunday and Whit Sunday as official holidays
+	    only in one state.
+	  - State code for Berlin. Code differed from documentation and there
+	    is limited use for the empty Berlin holiday set anyway, so we 
+	    assume that this slight interface change won't break anything.
