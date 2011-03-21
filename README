@@ -40,7 +40,9 @@ This module requires these other modules and libraries:
 
 COPYRIGHT AND LICENSE
 
-  Copyright (c) 2010, Martin Schmitt <mas at scsy dot de>
+  Copyright (c) 2011, Martin Schmitt <mas at scsy dot de>, 
+  including patches contributed by Marc Andre Selig, Oliver Paukstadt and
+  Tobias Leich
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose with or without fee is hereby granted, provided that the above
