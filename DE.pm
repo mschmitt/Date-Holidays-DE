@@ -191,6 +191,11 @@ sub holidays{
 
 	# Holidays relative to Easter
 	#
+	# Fat Thursday = Easter Sunday minus 52 days
+	my ($j_weib, $m_weib, $t_weib) =
+		Date::Calc::Add_Delta_Days($year, $month, $day, -52);
+	$holiday{'weib'} = _date2timestamp($j_weib, $m_weib, $t_weib);
+
 	# Carnival Monday = Easter Sunday minus 48 days
 	my ($j_romo, $m_romo, $t_romo) =
 		Date::Calc::Add_Delta_Days($year, $month, $day, -48);
@@ -366,6 +371,7 @@ The module knows about the following holidays:
 
   neuj  Neujahr                     New Year's day
   hl3k  Hl. 3 Koenige               Epiphany
+  weib  Weiberfastnacht             Fat Thursday
   romo  Rosenmontag                 Carnival monday
   fadi  Faschingsdienstag           Shrove tuesday
   asmi  Aschermittwoch              Ash wednesday
