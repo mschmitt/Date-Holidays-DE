@@ -10,6 +10,7 @@ use Date::Holidays::DE qw(holidays);
 my %feiertagsnamen = (
 		'neuj' => 'Neujahrstag',
 		'hl3k' => 'Hl. 3 Koenige',
+		'weib' => 'Weiberfastnacht',
 		'romo' => 'Rosenmontag',
 		'fadi' => 'Faschingsdienstag',
 		'asmi' => 'Aschermittwoch',
