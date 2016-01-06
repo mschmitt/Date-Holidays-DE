@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.6';
+our $VERSION   = '1.7';
 
 sub holidays{
 	my %parameters = (
@@ -91,6 +91,13 @@ sub holidays{
 	# 17ju/3okt are added to the list later, during date calculation
 	@{$holidays{'common'}} = qw(neuj karf ostm 1mai
 		pfim himm wei1 wei2);
+
+	# 500th reformation day in 2017 will be a common federal holiday
+	# Deep link to Wikipedia as of today, 2016-01-06:
+	# https://de.wikipedia.org/w/index.php?title=Reformationstag&oldid=148889526#Bundesweiter_Feiertag_2017_.28einmalig.29
+	if (2017 == $year){
+		push @{$holidays{'common'}}, 'refo';
+	}
 
 	# Now the extra holidays for the federal states.
 	# As if things weren't bad enough, some holidays are only valid
