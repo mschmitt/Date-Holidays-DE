@@ -34,7 +34,7 @@ DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-  Date::Calc 5.0
+  Date::Calc
   POSIX, Time::Local (from the standard Perl distribution)
 
 
