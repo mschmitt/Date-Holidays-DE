@@ -8,13 +8,13 @@ use Time::Local;
 use POSIX qw(strftime);
 
 # Prerequisite
-use Date::Calc 5.0 qw(Add_Delta_Days Easter_Sunday Day_of_Week This_Year);
+use Date::Calc qw(Add_Delta_Days Easter_Sunday Day_of_Week This_Year);
 
 require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.7';
+our $VERSION   = '1.8';
 
 sub holidays{
 	my %parameters = (
