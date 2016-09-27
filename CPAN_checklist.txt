@@ -1,3 +1,4 @@
 - Version number in DE.pm
 - Changes
+- Check README
 - make clean; perl Makefile.PL; make dist

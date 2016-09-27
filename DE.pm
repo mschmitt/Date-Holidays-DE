@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '1.8.3';
+our $VERSION   = '1.9';
 
 sub holidays{
 	my %parameters = (

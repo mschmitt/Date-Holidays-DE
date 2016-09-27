@@ -56,3 +56,6 @@ v1.7	Wed Jan  6 19:40:18 CET 2016
 
 v1.8.3  Mon Sep 19 21:25:02 CEST 2016
 	- Removed hard Date::Calc version dependency
+
+v1.9    Tue Sep 27 09:42:43 CEST 2016
+	- Version bump in a desperate attempt to fix some inconsistency
