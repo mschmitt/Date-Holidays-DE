@@ -35,6 +35,7 @@ sub holidays{
 	# romo  = Rosenmontag
 	# fadi  = Faschingsdienstag
 	# asmi  = Aschermittwoch
+	# frau  = Internationaler Frauentag
 	# grdo  = Gruendonnerstag
 	# karf  = Karfreitag
 	# kars  = Karsamstag
@@ -112,6 +113,9 @@ sub holidays{
 
 	# Extras for Berlin
 	@{$holidays{'be'}} = qw();
+	if ($year >= 2019) {
+		push @{$holidays{'be'}}, qw(frau);
+	}
 
 	# Extras for Brandenburg
 	@{$holidays{'bb'}} = qw(osts pfis refo);
@@ -394,6 +398,7 @@ The module knows about the following holidays:
   romo  Rosenmontag                 Carnival monday
   fadi  Faschingsdienstag           Shrove tuesday
   asmi  Aschermittwoch              Ash wednesday
+  frau  Internationaler Frauentag   International Women's day
   grdo  Gruendonnerstag             Maundy Thursday
   karf  Karfreitag                  Good friday
   kars  Karsamstag                  Holy Saturday
