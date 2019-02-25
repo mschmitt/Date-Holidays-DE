@@ -177,6 +177,9 @@ sub holidays{
 	# Heilige 3 Koenige Jan 6
 	$holiday{'hl3k'} = _date2timestamp($year,  1,  6);
 
+	# International Womens Day
+	$holiday{'frau'} = _date2timestamp($year,  3,  8);
+
 	# First of May
 	$holiday{'1mai'} = _date2timestamp($year,  5,  1);
 
