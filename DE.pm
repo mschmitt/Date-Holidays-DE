@@ -588,8 +588,8 @@ list of holiday dates. This does currently not appear to be the case.
 B<Date::Calc> works with year, month and day numbers exclusively. Even though
 this module uses B<Date::Calc> for all calculations, it represents the calculated
 holidays as UNIX timestamps (seconds since The Epoch) to allow for more
-flexible formatting. This limits the range of years to work on to 
-the years from 1972 to 2037. 
+flexible formatting. On Perl versions earlier than 5.12.0 (released 2010), this 
+limits the range of years to work on to the years from 1972 to 2037. 
 
 Historic regulations for I<Buss- und Bettag> are still not implemented.
 
