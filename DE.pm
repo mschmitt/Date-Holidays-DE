@@ -14,7 +14,7 @@ require Exporter;
 
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(holidays);
-our $VERSION   = '2.04';
+our $VERSION   = '2.05';
 
 sub holidays{
 	my %parameters = (
@@ -190,6 +190,9 @@ sub holidays{
 
 	# First of May
 	$holiday{'1mai'} = _date2timestamp($year,  5,  1);
+
+	# Liberation Day
+	$holiday{'befr'} = _date2timestamp($year,  5,  8);
 
 	# Christmas eve and Christmas Dec 24-26
 	$holiday{'heil'} = _date2timestamp($year, 12, 24);
